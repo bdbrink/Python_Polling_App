@@ -26,6 +26,7 @@ app = Flask(__name__, template_folder="templates")
 def index():
     return render_template("index.html", polls=polls_df)
 
+# html calls the function not the endpoint
 @app.route("/polls/<id>")
 def polls(id):
     poll = polls_df.loc[int(id)]
