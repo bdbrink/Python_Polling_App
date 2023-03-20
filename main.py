@@ -8,9 +8,9 @@ if not os.path.exists("polls.csv"):
     structure = {
         "id": [],
         "poll": [],
-        "option1" [],
-        "option2" [],
-        "option3" [],
+        "option1": [],
+        "option2": [],
+        "option3": [],
         "votes1": [],
         "votes2": [],
         "votes3": []
@@ -24,14 +24,14 @@ app = Flask(__name__, template_folder="templates")
 
 @app.route("/")
 def index():
-    return "Hello World"
+    return render_template("index.html", polls=polls_df)
 
 @app.route("/polls/<id>")
 def polls(id):
     poll = polls_df.loc[int(id)]
     return str(poll)
 
-@app.route("/polls", methods=["GET, "POST])
+@app.route("/polls", methods=["GET", "POST"])
 def create_poll():
     if request.method == "GET":
         pass
