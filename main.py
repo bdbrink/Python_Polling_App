@@ -38,5 +38,9 @@ def create_poll():
     elif request.method == "POST":
         pass
 
+@app.route("/vote/<id>/<option>")
+def vote(id, option):
+    pass
+
 if __name__ == "__main__":
     app.run(host="localhost", debug=True)
