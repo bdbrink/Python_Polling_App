@@ -13,7 +13,7 @@ if not os.path.exists("polls.csv"):
         "option3": [],
         "votes1": [],
         "votes2": [],
-        "votes3": []
+        "votes3": [],
     }
 
     pd.DataFrame(structure).set_index("id").to_csv("polls.csv")
@@ -22,15 +22,18 @@ polls_df = pd.read_csv("polls.csv").set_index("id")
 
 app = Flask(__name__, template_folder="templates")
 
+
 @app.route("/")
 def index():
     return render_template("index.html", polls=polls_df)
+
 
 # html calls the function not the endpoint
 @app.route("/polls/<id>")
 def polls(id):
     poll = polls_df.loc[int(id)]
     return render_template("show_poll.html", poll=poll)
+
 
 @app.route("/polls", methods=["GET", "POST"])
 def create_poll():
@@ -45,9 +48,11 @@ def create_poll():
         polls_df.to_csv("polls.csv")
         return redirect(url_for("index"))
 
+
 @app.route("/vote/<id>/<option>")
 def vote(id, option):
     pass
+
 
 if __name__ == "__main__":
     app.run(host="localhost", debug=True)
